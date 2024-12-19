@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  document-title-suggester:
+    build:
+      context: .
+      dockerfile: Dockerfile  # Optional: specify if your Dockerfile is not named 'Dockerfile'
+    container_name: document-title-suggester
+    environment:
+      - PAPERLESS_API_KEY=${PAPERLESS_API_KEY}
+      - PAPERLESS_URL=${PAPERLESS_URL}
+      - CHECK_INTERVAL=${CHECK_INTERVAL}
+      - TITLE_REGEX=${TITLE_REGEX}
+      - PROMPT_FILE=${PROMPT_FILE}
+      - RUNPOD_API_KEY=${RUNPOD_API_KEY}
+    volumes:
+      - ./config:/app/config
+      - ./scripts:/app/scripts
+      - ./logs:/app/logs
+    #restart: unless-stopped
