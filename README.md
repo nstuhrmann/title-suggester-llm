@@ -7,9 +7,9 @@ The code will use the paperless-ngx API to check for documents with the tag `inb
 If there are any matches, it will start a Pod hosted at [https://www.runpod.io/](runpod.io) with the given GPUs and GPU count and starting a LLM there. (For this to work, you need a runpod account, an API key, and prepaid credits). 
 *THIS WILL COST MONEY*.
 
-Warning: While this Pod is running, everybody can connect to the LLM and use it.
+Warning: While this Pod is running, everybody who has the URL can connect to the LLM and use it.
 
-It will then send the ncontent from the document OCR to the LLM and generate titles for documents and update the docuemnts using the paperless-ngx api.
+It will then send the content from the document OCR to the LLM and generate titles for documents and update the documents using the paperless-ngx api with the new title and by adding the tag specified by `AUTO_TAG`.
 
 After all documents are processed, it will sleep for one hour and start over again.
 
@@ -19,7 +19,9 @@ To run, set the following environmental variables:
 PAPERLESS_API_KEY=<your key>
 RUNPOD_API_KEY=<your key>
 PAPERLESS_URL=http://<your ip>:8000/api
+TAG_FILTER=inbox
 TITLE_REGEX=scanned.*
+AUTO_TAG=auto generated title
 CHECK_INTERVAL=60
 PROMPT_FILE=config/prompt
 IMAGE_NAME=vllm/vllm-openai:latest
@@ -29,5 +31,6 @@ GPU_TYPE=Nvidia GeForce RTX 4090
 GPU_COUNT=2
 CONTAINER_SIZE=20
 VOLUME_SIZE=30
-AUTO_TITLE_SUFFIX= (auto-generated title)
 ```
+
+Please note that the tags used for `AUTO_TAG` and `TAG_FILTER` need to exist in papaerless-ngx.
