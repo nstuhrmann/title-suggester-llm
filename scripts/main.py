@@ -130,9 +130,12 @@ def main():
             logging.info('Updating titles')
             for i, (id, title) in enumerate(new_title.items()):
                 logging.info(f'Updating document {id} ({i}/{len(new_title)}), new title: {title}')
+                update_document_tag(id, tag_id)
+                
                 if title:
-                    update_document_tag(id, tag_id)
                     update_document_title(id, title[0])
+                else:
+                    update_document_title(id, '(no title could be generated)')
 
 
         if check_interval == 0:
