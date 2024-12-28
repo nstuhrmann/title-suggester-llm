@@ -123,9 +123,9 @@ class RunPodChatBot:
 
         payload = self._assemble_payload(message)
 
-        logging.info(f'Payload is {payload}')
-        logging.info(f'URL is {self.API_URL}')
-        logging.info(f'headers are {self.headers}')
+        logging.debug(f'Payload is {payload}')
+        logging.debug(f'URL is {self.API_URL}')
+        logging.debug(f'headers are {self.headers}')
         response = requests.post(self.API_URL, headers=self.headers, json=payload)
 
         # Print the response
