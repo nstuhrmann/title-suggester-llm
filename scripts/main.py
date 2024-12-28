@@ -119,7 +119,7 @@ def main():
             new_title = dict()
 
             for i, doc in enumerate(matches):
-                logging.info(f"Processing document ID {doc['id']} ({i}/{len(matches)}) with title: {doc['title']}")
+                logging.info(f"Processing document ID {doc['id']} ({i+1}/{len(matches)}) with title: {doc['title']}")
                 content = doc.get('content', '')
                 new_title[doc['id']] = bot.get_response(content)
                 #new_title[doc['id']] = [doc['title'], ]
@@ -129,7 +129,7 @@ def main():
 
             logging.info('Updating titles')
             for i, (id, title) in enumerate(new_title.items()):
-                logging.info(f'Updating document {id} ({i}/{len(new_title)}), new title: {title}')
+                logging.info(f'Updating document {id} ({i+1}/{len(new_title)}), new title: {title}')
                 update_document_tag(id, tag_id)
                 
                 if title:
